@@ -46,24 +46,16 @@ $( '.navbar-header a' ).click( function() {
 /* Make each element the same height */
 $(function() {
 	$('.team-bio').matchHeight();
-});
+} );
 $(function() {
-	$('.team-name').matchHeight();
-});
+	$( '.team-name' ).matchHeight();
+} );
 
 
 
 /* Stuff to do upon load. */
 $( document ).ready( function() {
 	$( window ).on( 'load resize' , function(){
-        /* Set footer height. */
-		var img = new Image();
-		img.src = '../img/footer-bg.png';
-		var win = $( window ).width();
-		var ratio = win / img.width;
-		var newHeight = img.height * ratio;
-		$( '#footer' ).height( newHeight );
-        
         /* Set video width. */
         var galleryWidth = $( '#gallery-container' ).width()
 		$( '#gallery-video' ).width( galleryWidth );
@@ -77,7 +69,7 @@ $( document ).ready( function() {
             e.preventDefault();
             var item = this.href.split( '#' )[1];
             $( '.pages:visible' ).fadeOut( 1000 , function () {
-                window.scrollTo(0, 0);
+                window.scrollTo( 0, 0 );
                 $( '#' + item ).fadeIn( 1000 );
             });
             
