@@ -65,18 +65,23 @@ $( document ).ready( function() {
         /* Content swap functionality. 
         Sauce: http://jsfiddle.net/FtS8u/7/ */
         $( '.pages' ).hide();
+        
+        var inTransition = false;
         $( '.navbar a' ).click( function ( e ) {
             e.preventDefault();
+            if( inTransition ) { $( 'section' ).stop(); }
+            inTransition = true;
             var item = this.href.split( '#' )[1];
-            $( '.pages:visible' ).fadeOut( 1000 , function () {
+            $( '.pages:visible' ).fadeOut( 1000 , function() {
                 window.scrollTo( 0, 0 );
-                $( '#' + item ).fadeIn( 1000 );
+                $( '#' + item ).fadeIn( 1000, function() { inTransition = false; } );
             });
             
             /* Switches active state. */
             $( '.navbar' ).find( '.active' ).removeClass( 'active' );
             $( this ).parent().addClass( 'active' );
         });
+        
         $( '#intro' ).show();
     });
 });
