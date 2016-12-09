@@ -2,6 +2,7 @@
  * Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ * Modifications copyright (C) 2016 Laura Mun.
  */
 
 // jQuery to collapse the navbar on scroll
@@ -42,21 +43,57 @@ $('.navbar-header a').click(function() {
 
 
 
+/* Make each element the same height */
+$(function() {
+	$('.team-bio').matchHeight();
+});
+$(function() {
+	$('.team-name').matchHeight();
+});
 
 
-// START OF CUSTOMIZATION
-// Just made latitude and longitude into variables to reduce redundancy.
 
+/* Stuff to do upon load. */
+$( document ).ready( function() {
+	$( window ).on( 'load resize' , function(){
+        /* Set footer height. */
+		var img = new Image();
+		img.src = '../img/footer-bg.png';
+		var win = $( window ).width();
+		var ratio = win / img.width;
+		var newHeight = img.height * ratio;
+		$( '#footer' ).height( newHeight );
+        
+        /* Set video width. */
+        var galleryWidth = $( '#gallery-container' ).width()
+		$( '#gallery-video' ).width( galleryWidth );
+	});
+    
+	$( window ).on( 'load' , function(){
+        /* Content swap functionality. 
+        Sauce: http://jsfiddle.net/FtS8u/7/ */
+        $( '.pages' ).hide();
+        $( '.navbar a' ).click( function ( e ) {
+            e.preventDefault();
+            var item = this.href.split( '#' )[1];
+            $( '.pages:visible' ).fadeOut( 1000 , function () {
+                window.scrollTo(0, 0);
+                $( '#' + item ).fadeIn( 1000 );
+            });
+            
+            /* Switches active state. */
+            $( '.navbar' ).find( '.active' ).removeClass( 'active' );
+            $( this ).parent().addClass( 'active' );
+        });
+        $( '#intro' ).show();
+    });
+});
+
+
+
+/* Google Maps Scripts */
 var lat = 40.7623557;
 var lng = -73.9796262;
-
-// END OF CUSTOMIZATION
-
-
-
-
-
-// Google Maps Scripts
 var map = null;
 // When the window has finished loading create our google map below
 google.maps.event.addDomListener(window, 'load', init);
