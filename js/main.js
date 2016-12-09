@@ -29,15 +29,15 @@ $(function() {
 });
 
 // Closes the Responsive Menu on Menu Item Click
-$('.navbar-collapse ul li a').click(function() {
-    if (window.innerWidth < 768) {
-        $(this).closest('.collapse').collapse('toggle');
+$( '.navbar-collapse ul li a' ).click( function() {
+    if ( window.innerWidth < 768 ) {
+        $( this ).closest( '.collapse' ).collapse( 'toggle' );
     }
 });
 
-$('.navbar-header a').click(function() {
-    if (window.innerWidth < 768) {
-        $('.navbar-collapse ul li a').closest('.collapse').collapse('toggle');
+$( '.navbar-header a' ).click( function() {
+    if ( window.innerWidth < 768 && $( '.navbar-collapse ul li a' ).is( ':visible' ) ) {
+        $( '.navbar-collapse ul li a' ).closest( '.collapse' ).collapse( 'toggle' );
     }
 });
 
