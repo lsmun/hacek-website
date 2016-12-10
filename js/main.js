@@ -4,6 +4,17 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  * Modifications copyright (C) 2016 Laura Mun.
  */
+ 
+$( document ).ready( function( $ ) {
+    // site preloader
+    $( window ).on( 'load' , function(){
+        $( '#loading-image' ).fadeOut( 1000 , function() {
+            $( this ).hide();
+            $( '#content' ).fadeIn(2000);
+        } );
+    } );
+    $( window ).scroll( collapseNavbar );
+} );
 
 // jQuery to collapse the navbar on scroll
 function collapseNavbar() {
@@ -14,44 +25,37 @@ function collapseNavbar() {
     }
 }
 
-$(window).scroll(collapseNavbar);
-$(document).ready(collapseNavbar);
-
 // jQuery for page scrolling feature - requires jQuery Easing plugin
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
+$( function() {
+    $( 'a.page-scroll' ).bind( 'click' , function( event ) {
+        var $anchor = $( this );
+        $( 'html, body' ).stop().animate({
+            scrollTop: $( $anchor.attr( 'href' ) ).offset().top
+        }, 1500, 'easeInOutExpo' );
         event.preventDefault();
-    });
-});
+    } );
+} );
 
 // Closes the Responsive Menu on Menu Item Click
 $( '.navbar-collapse ul li a' ).click( function() {
     if ( window.innerWidth < 768 ) {
         $( this ).closest( '.collapse' ).collapse( 'toggle' );
     }
-});
+} );
 
 $( '.navbar-header a' ).click( function() {
     if ( window.innerWidth < 768 && $( '.navbar-collapse ul li a' ).is( ':visible' ) ) {
         $( '.navbar-collapse ul li a' ).closest( '.collapse' ).collapse( 'toggle' );
     }
-});
-
-
-
-/* Make each element the same height */
-$(function() {
-	$('.team-bio').matchHeight();
 } );
-$(function() {
+
+// Make each element the same height
+$( function() {
+	$( '.team-bio' ).matchHeight();
+} );
+$( function() {
 	$( '.team-name' ).matchHeight();
 } );
-
-
 
 /* Stuff to do upon load. */
 $( document ).ready( function() {
